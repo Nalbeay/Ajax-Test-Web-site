@@ -1,23 +1,25 @@
 ﻿$(function () {
-    GetStudents();
+    GetStage();
 });
 
 
 $('#ClickButton').on('click', function (e) {
     var stageId = $('#stageId').val();
-    GetStudents(stageId);
+    GetStage(stageId);
 });
 
-function GetStudents(filters) {
+function GetStage(stageId) {
     $.ajax({
-        url: '/Home/Students',
+        url: '/Home/GetStage',
         type: 'POST',
         cache: false,
         async: true,
         dataType: "html",
-        data: filters
+        data: stageId
     })
         .done(function (result) {
-            $('#students').html(result);
+            $('#stageForm').html(result);
+        }).fail(function () {
+            alert("Произошел сбой");
         });
 }

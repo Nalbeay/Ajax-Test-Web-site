@@ -1,6 +1,6 @@
-﻿using System.Collections.Generic;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using ajaxPartial.Models;
+using System;
 
 namespace ajaxPartial.Controllers
 {
@@ -8,15 +8,14 @@ namespace ajaxPartial.Controllers
     {
         public IActionResult Index()
         {
-            //List<Student> students = Student.GetStudents(new StudentFilter());
             return View();
         }
 
         [HttpPost]
-        public IActionResult Students (StudentFilter filters)
+        public IActionResult GetStage(string stageId)
         {
-            List<Student> students = Student.GetStudents(filters);
-            return PartialView("_Students", students);
+            Stage newStage = new Stage() { Id = Convert.ToInt32(stageId) };
+            return PartialView("Massege", newStage);
         }
     }
 }
